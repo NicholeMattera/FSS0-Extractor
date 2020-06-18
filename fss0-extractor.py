@@ -87,10 +87,10 @@ if __name__ == "__main__":
             name = name_bytes.decode("ascii")
 
         # Extract the file
-        fusee_secondary.seek(content_header["offset"])
-        content = fusee_secondary.read(content_header["size"])
-        name = f'{content_header["name"]}.{getExtension(content_header["type"])}'
-        file = open(Path(args.output).joinpath(name), "wb")
+        fusee_secondary.seek(content_offset)
+        content = fusee_secondary.read(content_size)
+        file_name = f'{name}.{getExtension(content_type)}'
+        file = open(Path(args.output).joinpath(file_name), "wb")
         file.write(content)
         file.close()
 
